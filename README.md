@@ -1,4 +1,4 @@
-## Personality Traits Prediction from Text Communications
+## Personality Prediction Using Text
 
 To run the code, use this command:
-```flask --app app.py --debug run```
+```streamlit run Home.py```
