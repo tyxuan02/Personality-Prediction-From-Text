@@ -22,9 +22,54 @@ class ModelPredictor:
         with torch.no_grad():
             outputs = self.model(input_ids, attention_mask=attention_mask)
             logits = outputs.logits
-            probs = F.softmax(logits, dim=1)
-            predicted_label_idx = torch.argmax(probs, dim=1).item()
+            probs = F.softmax(logits, dim=1).cpu().numpy()[0]  # Convert to numpy for easier manipulation
+
+        # Map each probability to the corresponding MBTI type
+        mbti_types = label_encoder.inverse_transform(range(len(probs)))
+
+        # Initialize trait probabilities
+        trait_probabilities = {
+            'I': 0, 'E': 0,
+            'N': 0, 'S': 0,
+            'T': 0, 'F': 0,
+            'J': 0, 'P': 0
+        }
+
+        # Sum probabilities for each trait based on MBTI types
+        for mbti_type, prob in zip(mbti_types, probs):
+            if mbti_type[0] == 'I':
+                trait_probabilities['I'] += prob
+            else:
+                trait_probabilities['E'] += prob
+            
+            if mbti_type[1] == 'N':
+                trait_probabilities['N'] += prob
+            else:
+                trait_probabilities['S'] += prob
+            
+            if mbti_type[2] == 'T':
+                trait_probabilities['T'] += prob
+            else:
+                trait_probabilities['F'] += prob
+            
+            if mbti_type[3] == 'J':
+                trait_probabilities['J'] += prob
+            else:
+                trait_probabilities['P'] += prob
+
+        # Normalize the probabilities for each trait dimension
+        for dimension in ['I', 'E'], ['N', 'S'], ['T', 'F'], ['J', 'P']:
+            total_prob = trait_probabilities[dimension[0]] + trait_probabilities[dimension[1]]
+            trait_probabilities[dimension[0]] /= total_prob
+            trait_probabilities[dimension[1]] /= total_prob
+
+        # Find the MBTI type with the highest probability
+        predicted_type_idx = probs.argmax()
+        predicted_type = mbti_types[predicted_type_idx]
+        predicted_type_prob = probs[predicted_type_idx]
+
+        # Return only the predicted MBTI traits
+        trait_probabilities = {trait: prob for trait, prob in trait_probabilities.items() if trait in predicted_type}
+
+        return predicted_type, trait_probabilities # predicted_type_prob,
         
-        # Decode the predicted label
-        predicted_label = label_encoder.inverse_transform([predicted_label_idx])[0]
-        return predicted_label
