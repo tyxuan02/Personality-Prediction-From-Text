@@ -68,8 +68,10 @@ class ModelPredictor:
         predicted_type = mbti_types[predicted_type_idx]
         predicted_type_prob = probs[predicted_type_idx]
 
-        # Return only the predicted MBTI traits
-        trait_probabilities = {trait: prob for trait, prob in trait_probabilities.items() if trait in predicted_type}
+        mbti_type_probabilities = {trait: prob for trait, prob in zip(mbti_types, probs)}
 
-        return predicted_type, trait_probabilities # predicted_type_prob,
+        # # Return only the predicted MBTI traits
+        # trait_probabilities = {trait: prob for trait, prob in trait_probabilities.items() if trait in predicted_type}
+
+        return predicted_type, mbti_type_probabilities # predicted_type_prob,
         

@@ -33,6 +33,12 @@ st.markdown("""
             margin-bottom: 1em;
             font-weight: bold;
         }
+        .result-subheading {
+            font-size: 1.5em;
+            color: #6A5ACD;
+            margin-bottom: 1em;
+            font-weight: 600;
+        }
         .mbti-desc {
             display: block;
             text-align: justify;
@@ -42,8 +48,8 @@ st.markdown("""
             margin-top: 1em;
         }
         .trait-label {
-            font-size: 1.5em;
-            font-weight: 600;
+            font-size: 1.1em;
+            # font-weight: 600;
         }
         .trait-box {
             margin: 0.5em 0;
@@ -77,23 +83,40 @@ st.write("---------")
 option = st.selectbox('Select input type:', ('Text', 'CSV or Excel File'), index=0)
 
 if option == 'Text':
+    st.info("Please enter a text with at least 10 words to predict the MBTI type. Words between 80 - 100 are recommended for better results.")
     # Text Input Area
     txt = st.text_area(
         label="Input Text",
-        placeholder="Enter text here...",
+        placeholder="Enter your text here...",
         height=200,
     )
+    num_words = len(txt.split())
+    # Display word count
+    st.write(f"Number of words: {num_words}")
 
     # Prediction Button
     if st.button("Predict", key="predict_button"):
-        if txt and len(txt.split()) > 20:
+        if txt and len(txt.split()) > 9 and len(txt.split()) <= 800:
             with st.spinner("Analyzing your text..."):
                 predicted_label, trait_probabilities = predictor.predict(txt)
 
-            # Display the predicted MBTI type
+            # Results
             st.write("---------")
-            st.markdown(f'<div class="result-style">Predicted MBTI Type: {predicted_label}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-style">Results</div>', unsafe_allow_html=True)
+            type_probabilities = pd.DataFrame(trait_probabilities.items(), columns=["MBTI Type", "Probability"])
+            
+            # Display the probabilities of each MBTI type
+            st.markdown(f'<div class="result-subheading">Probabilities of Each MBTI Type</div>', unsafe_allow_html=True)
+            # Remove index column
+            type_probabilities.set_index("MBTI Type", inplace=True)
+            df = pd.DataFrame([type_probabilities["Probability"]])
+            # Display from the biggest probability to the smallest
+            df = df.T
+            df = df.sort_values(by="Probability", ascending=False)
+            st.dataframe(df, width=800)
 
+            # Display the predicted MBTI type
+            st.markdown(f'<div class="result-subheading">Predicted MBTI Type: {predicted_label}</div>', unsafe_allow_html=True)
             predicted_mbti_type = [ output for output in outputs['mbti_type'] if output["type"] == predicted_label ]
             description = predicted_mbti_type[0]["description"]
             img = predicted_mbti_type[0]["img"]
@@ -106,26 +129,22 @@ if option == 'Text':
             with col2:
                 st.markdown(f'<div class="mbti-desc">{description}</div>', unsafe_allow_html=True)
                 st.markdown(f'<a href="{url}" target="_blank" class="mbti-view-details">View more details</a>', unsafe_allow_html=True)
-
-            # Display the trait probabilities (in a table) (trait label in the first row and trait probability in the second row)
-            trait_probabilities = pd.DataFrame(trait_probabilities.items(), columns=["Trait", "Probability"])
-            # Remove index column
-            trait_probabilities.set_index("Trait", inplace=True)
-            df = pd.DataFrame([trait_probabilities["Probability"]])
-            st.dataframe(df, width=800)
             
             mbti_traits = [ trait for trait in predicted_label ]
             predicted_mbti_traits = [ output for output in outputs['mbti_traits'] if output["trait"] in mbti_traits ]
 
             # Display the traits of the MBTI type
+            st.markdown(f'<div class="result-subheading">Predicted MBTI Traits</div>', unsafe_allow_html=True)
             for trait in predicted_mbti_traits:
                 trait_name = trait["name"]
                 trait_desc = trait["description"]
                 trait_color = trait["color"]
                 st.markdown(f'<div class="trait-label">{trait_name}</div>', unsafe_allow_html=True)
                 st.markdown(f'<div class="trait-box" style="background-color: {trait_color};">{trait_desc}</div>', unsafe_allow_html=True)        
+        elif len(txt.split()) > 500:
+            st.error("Please enter text with less than 500 words.")
         else:
-            st.error("Please enter text with more than 20 words.")
+            st.error("Please enter text with at least 10 words.")
 
 elif option == 'CSV or Excel File':
     # File Upload Area (limit to one file)
@@ -152,8 +171,8 @@ elif option == 'CSV or Excel File':
                     predictions = []
                     for _, row in df.iterrows():
                         text = row[column_name]
-                        # Check if text is a string and has more than 20 words
-                        if isinstance(text, str) and len(text.split()) > 20:
+                        # Check if text is a string and has more than 9 words
+                        if isinstance(text, str) and len(text.split()) > 9:
                             prediction, _ = predictor.predict(text)
                             predictions.append(prediction)
                         else:

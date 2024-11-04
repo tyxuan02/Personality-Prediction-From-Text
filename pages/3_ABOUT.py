@@ -92,8 +92,8 @@ st.markdown("""
 This system utilizes:
 
 - BERT (Bidirectional Encoder Representations from Transformers), a state-of-the-art natural language processing model
-- Training data from the MBTI 500 dataset: https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset
-- Achievement of ?% accuracy in personality prediction through extensive training and validation
+- Training data from the [MBTI 500 dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset). Initially, the dataset was unbalanced, but it was balanced using oversampling techniques.
+- Achievement of ?% accuracy in validation tests
 </div>
 """, unsafe_allow_html=True)
 
@@ -138,7 +138,7 @@ st.markdown('<div class="section-heading">Can I improve the accuracy of my resul
 st.markdown("""
 <div class="section-text">
 
-- Provide longer text samples (100 words is ideal)
+- Provide longer text samples (80 to 100 words is ideal)
 - Use your natural writing style
 - Submit multiple different text samples
 </div>
@@ -161,6 +161,6 @@ st.markdown("""
 - However, results are not guaranteed to be accurate
 - They are based on statistical patterns and probabilities
 - Use the results as a guide, not a definitive assessment
-- For a more comprehensive evaluation, consider taking the official MBTI test: https://www.16personalities.com/
+- For a more comprehensive evaluation, consider taking the [official MBTI test](https://www.16personalities.com/)
 </div>
 """, unsafe_allow_html=True)
