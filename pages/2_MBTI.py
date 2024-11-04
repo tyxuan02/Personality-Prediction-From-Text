@@ -3,8 +3,8 @@ import json
 
 # Configure the page
 st.set_page_config(
-    page_title="Personality Predictor",
-    page_icon="🔮",
+    page_title="MBTI - Personality Predictor",
+    page_icon="🙋‍♂️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -29,9 +29,18 @@ st.markdown("""
             font-weight: 700;
         }
         .subheading-style {
-            font-size: 1.5em;
-            font-weight: 600;
+            font-size: 1.7em;
+            font-weight: 700;
             color: #6A5ACD;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .option-desc {
+            font-size: 1.2em;
+            color: #333333;
+            margin: 0.5em 0;
+            text-align: center;
         }
         .trait-box {
             background-color: #f0f0f5;
@@ -67,35 +76,42 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="title-style">What\'s Your MBTI Personality Type?</div>', unsafe_allow_html=True)
+st.markdown('<div class="title-style">MBTI Traits & Types Overview</div>', unsafe_allow_html=True)
 st.write("---")
-st.markdown('<div class="subheading-style">Personality Traits</div>', unsafe_allow_html=True)
 
-for i in range(0, len(outputs['mbti_traits']), 2):
-    col1, col2 = st.columns(2)
-    for idx, col in enumerate((col1, col2)):
-        if i + idx < len(outputs['mbti_traits']):
-            trait = outputs['mbti_traits'][i + idx]
-            col.markdown(f"<div class='trait-box' style='background-color: {trait['color']};'>"
-                         f"<div class='trait-title'>{trait['name']}</div>"
-                         f"<p class='trait-desc'>{trait['description']}</p>"
-                         f"</div>", unsafe_allow_html=True)
+# Display the options
+option = st.selectbox('Explore MBTI:', ['MBTI Traits', 'MBTI Types'])
 
-# Display MBTI types below traits
-st.write("---")
-st.markdown('<div class="subheading-style">Personality Types</div>', unsafe_allow_html=True)
+if option == 'MBTI Traits':
+    # Display MBTI traits
+    st.markdown('<div class="subheading-style">Personality Traits</div>', unsafe_allow_html=True)
+    st.markdown('<div class="option-desc">MBTI traits are the building blocks of the MBTI personality types. They are the characteristics that make up each of the 16 personality types. It assesses four key dimensions, each represented by a pair of opposing traits.</div>', unsafe_allow_html=True)
 
-for i in range(0, len(outputs['mbti_type']), 2):
-    col1, col2 = st.columns(2)
-    for idx, col in enumerate((col1, col2)):
-        if i + idx < len(outputs['mbti_type']):
-            mbti_type = outputs['mbti_type'][i + idx]
-            with col:
-                st.markdown(f"<div class='mbti-type-box'>", unsafe_allow_html=True)
-                inner_col1, inner_col2 = st.columns([1, 2])
-                with inner_col1:
-                    st.image(mbti_type['img'], use_column_width=True)
-                with inner_col2:
-                    st.markdown(f"<div class='mbti-type-title'>{mbti_type['type']}</div>", unsafe_allow_html=True)
-                    st.markdown(f"<div class='mbti-desc'>{mbti_type['description']}</div>", unsafe_allow_html=True)
-                    st.markdown(f"<a href='{mbti_type['url']}' target='_blank' class='mbti-view-details'>View more details</a>", unsafe_allow_html=True)
+    for i in range(0, len(outputs['mbti_traits']), 2):
+        col1, col2 = st.columns(2)
+        for idx, col in enumerate((col1, col2)):
+            if i + idx < len(outputs['mbti_traits']):
+                trait = outputs['mbti_traits'][i + idx]
+                col.markdown(f"<div class='trait-box' style='background-color: {trait['color']};'>"
+                            f"<div class='trait-title'>{trait['name']}</div>"
+                            f"<p class='trait-desc'>{trait['description']}</p>"
+                            f"</div>", unsafe_allow_html=True)
+elif option == 'MBTI Types':
+    # Display MBTI types
+    st.markdown('<div class="subheading-style">Personality Types</div>', unsafe_allow_html=True)
+    st.markdown('<div class="option-desc">MBTI personality types are the result of a combination of traits. Each type is characterized by its unique set of traits and their associated strengths and weaknesses. There are 16 different types, each representing a unique combination of traits.</div>', unsafe_allow_html=True)
+
+    for i in range(0, len(outputs['mbti_type']), 2):
+        col1, col2 = st.columns(2)
+        for idx, col in enumerate((col1, col2)):
+            if i + idx < len(outputs['mbti_type']):
+                mbti_type = outputs['mbti_type'][i + idx]
+                with col:
+                    st.markdown(f"<div class='mbti-type-box'>", unsafe_allow_html=True)
+                    inner_col1, inner_col2 = st.columns([1, 2])
+                    with inner_col1:
+                        st.image(mbti_type['img'], use_column_width=True)
+                    with inner_col2:
+                        st.markdown(f"<div class='mbti-type-title'>{mbti_type['type']}</div>", unsafe_allow_html=True)
+                        st.markdown(f"<div class='mbti-desc'>{mbti_type['description']}</div>", unsafe_allow_html=True)
+                        st.markdown(f"<a href='{mbti_type['url']}' target='_blank' class='mbti-view-details'>View more details</a>", unsafe_allow_html=True)

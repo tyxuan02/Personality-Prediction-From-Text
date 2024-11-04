@@ -6,7 +6,7 @@ from collections import Counter
 
 # Configure the page
 st.set_page_config(
-    page_title="Personality Predictor",
+    page_title="Home - Personality Predictor",
     page_icon="🔮",
     layout="centered",
     initial_sidebar_state="expanded",
