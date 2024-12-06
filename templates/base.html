@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Personality Traits Prediction from Text Communications</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-light">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">Personality Predictor</a>
+
+      <div id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item me-4">
+            <a class="nav-link" aria-current="page" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+
+</html>
+
+<script>
+  // add active to the current nav link
+  const currentLocation = window.location.href;
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    if (link.href === currentLocation) {
+      link.classList.add('active');
+    }
+  });
+
+  // show/hide text input or file upload based on the selected input type
+  const inputTypeSelect = document.getElementById('inputType');
+  const textInputDiv = document.getElementById('textInputDiv');
+  const fileUploadDiv = document.getElementById('fileUploadDiv');
+
+  inputTypeSelect.addEventListener('change', function () {
+    const selectedType = this.value;
+    if (selectedType === 'text') {
+      textInputDiv.classList.remove('d-none');
+      fileUploadDiv.classList.add('d-none');
+    } else {
+      textInputDiv.classList.add('d-none');
+      fileUploadDiv.classList.remove('d-none');
+    }
+  });
+
+  // handle case where users didn't upload a text file or upload a non-text file
+  const form = document.querySelector('form');
+  form.addEventListener('submit', function (event) {
+    const inputType = inputTypeSelect.value;
+    if (inputType === 'text') {
+      const textInput = document.getElementById('textInput');
+      const text = textInput.value;
+      if (text.trim() === '') {
+        alert('Please enter some text.');
+        event.preventDefault();
+      }
+    } else {
+      const fileInput = document.getElementById('fileInput');
+      const fileName = fileInput.value;
+      if (!fileName.endsWith('.txt')) {
+        alert('Please upload a text file.');
+        event.preventDefault();
+      }
+    }
+  });
+
+  // // use spider chart to display the predicted scores
+  // const radarChart = document.getElementById('radar-chart');
+  // let data = radarChart.getAttribute("data");
+
+  // new Chart(radarChart, {
+  //   type: 'radar',
+  //   data: {
+  //     labels: ['Agreeableness', 'Conscientiousness', 'Extraversion', 'Neuroticism', 'Openness'],
+  //     datasets: [{
+  //       label: 'Big 5 Personality Traits Prediction',
+  //       data: JSON.parse(data),
+  //       fill: true,
+  //       backgroundColor: 'rgba(54, 162, 235, 0.2)',
+  //       borderColor: 'rgb(54, 162, 235)',
+  //       pointBackgroundColor: 'rgb(54, 162, 235)',
+  //       pointBorderColor: '#fff',
+  //       pointHoverBackgroundColor: '#fff',
+  //       pointHoverBorderColor: 'rgb(54, 162, 235)'
+  //     }]
+  //   },
+  //   labels: ['Agreeableness', 'Conscientiousness', 'Extraversion', 'Neuroticism', 'Openness'],
+  //   options: {
+  //     scales: {
+  //       r: {
+  //         suggestedMin: 0,
+  //         suggestedMax: 100
+  //       }
+  //     }
+  //   }
+  // });
+</script>
