@@ -2,9 +2,9 @@
 import torch
 from transformers import BertTokenizer, BertConfig, BertModel, BertPreTrainedModel
 import torch.nn as nn
-from preprocessing import preprocess_text, bert_tokenize
+from utils import preprocess_text, bert_tokenize
 
-class ModelPredictor:
+class Model:
     def __init__(self):
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
         self.model = BertWithCustomClassifier(BertConfig.from_pretrained('bert-base-uncased', num_labels=4))
