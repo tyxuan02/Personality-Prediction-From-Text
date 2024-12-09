@@ -1,0 +1,189 @@
+{
+    "question_sets": [
+        {
+            "id": "0",
+            "name": "Working on a group project",
+            "scenario": "You're assigned to work on a group project with people you've never worked with before.",
+            "questions": [
+                "How do you approach dividing tasks among the group?",
+                "What do you do to ensure effective communication?",
+                "How do you handle a disagreement within the group?",
+                "Describe how you contribute to the team's success.",
+                "How do you provide feedback to your group members?"
+            ]
+        },
+        {
+            "id": "1",
+            "name": "Meeting new people",
+            "scenario": "You're attending a networking event to meet professionals in your field.",
+            "questions": [
+                "How do you usually start a conversation with someone new?",
+                "What do you talk about to keep the conversation engaging?",
+                "How do you follow up with someone you want to stay connected with?",
+                "Describe a moment when you felt particularly confident at such an event."
+            ]
+        },
+        {
+            "id": "2",
+            "name": "Managing finances",
+            "scenario": "You unexpectedly receive a large bill that disrupts your monthly budget.",
+            "questions": [
+                "How would you assess which expenses to cut or delay to cover the bill?",
+                "What steps would you take to avoid missing payment deadlines?",
+                "How would you plan to rebuild your savings after paying the bill?",
+                "How would you communicate with the billing company if you need an extension?",
+                "What strategies would you adopt to prevent similar financial surprises in the future?"
+            ]
+        },
+        {
+            "id": "3",
+            "name": "Job loss",
+            "scenario": "You've been laid off from your job unexpectedly.",
+            "questions": [
+                "How will you cope with the emotional impact of job loss?",
+                "What immediate steps will you take to find a new job?",      
+                "How can you utilize your network to find potential job opportunities?",    
+                "What strategies can you implement to maintain your financial stability during this transition period?"
+            ]
+        },
+        {
+            "id": "4",
+            "name": "Health and well-being",
+            "scenario": "You're feeling increasingly tired and stressed but don't have time for a vacation.",
+            "questions": [
+                "How would you identify the primary causes of your fatigue?",
+                "What small changes could you make to your daily routine to feel more energized?",
+                "How would you prioritize self-care amidst a busy schedule?",
+                "What actions would you take to seek support from family or friends?",
+                "How would you plan a long-term solution to maintain your mental and physical health?"
+            ]
+        },
+        {
+            "id": "5",
+            "name": "Planning a vacation",
+            "scenario": "You''re planning a trip to a destination you've always wanted to visit.",
+            "questions": [
+                "How do you decide where to go?",
+                "What do you consider when planning your itinerary?",
+                "How do you budget for the trip and save money on expenses?",
+                "How do you prepare for unexpected situations while traveling?",
+                "Describe your ideal day during this vacation."
+            ]
+        },
+        {
+            "id": "6",
+            "name": "Dealing with a conflict",
+            "scenario": "You've had a disagreement with a close friend.",
+            "questions": [
+                "How do you approach starting a conversation to resolve the conflict?",
+                "What do you say to express your perspective while listening to theirs?",
+                "How do you ensure the issue doesn't affect your friendship in the long run?",
+                "Describe how you feel after resolving the disagreement."
+            ]
+        },
+        {
+            "id": "7",
+            "name": "Handling a difficult decision",
+            "scenario": "You're faced with a tough decision that could significantly impact your future.",
+            "questions": [
+                "How do you weigh the pros and cons of each option?",
+                "What do you do when you feel uncertain about what to choose?",
+                "How do you explain your decision to those affected by it?",
+                "Describe how you feel after making the decision.",
+                "What steps would you take to cope with the consequences of your choice?"
+            ]
+        },
+        {
+            "id": "8",
+            "name": "Learning a new skill",
+            "scenario": "You've decided to learn a new skill that interests you.",
+            "questions": [
+                "How do you decide which resources or methods to use for learning?",
+                "What do you do to stay motivated during the process?",      
+                "How do you handle setbacks or challenges while learning?",    
+                "Describe how you feel once you've mastered the skill."
+            ]
+        },
+        {
+            "id": "9",
+            "name": "Relationship challenges",
+            "scenario": "Your partner forgets an important occasion, like your anniversary, and it upsets you.",
+            "questions": [
+                "How would you communicate your feelings without creating conflict?",
+                "What steps would you take to understand why they forgot?",
+                "How would you balance expressing disappointment with maintaining the relationship?",
+                "What would you do to work together to improve communication moving forward?",
+                "How would you ensure similar situations are handled positively in the future?"
+            ]
+        },
+        {
+            "id": "10",
+            "name": "Time Management in daily life",
+            "scenario": "You have a packed day of errands, and an unexpected situation delays you significantly.",
+            "questions": [
+                "How would you reorganize your priorities to complete essential tasks?",
+                "What strategies would you use to stay calm and focused under pressure?",
+                "How would you communicate with others involved if you can't meet prior commitments?",
+                "What adjustments would you make to ensure you're not overwhelmed?",
+                "How would you reflect on and improve your planning for future busy days?"
+            ]
+        },
+        {
+            "id": "11",
+            "name": " Market shopping",
+            "scenario": "At a local market, you realize you've been overcharged for a purchase.",
+            "questions": [
+                "How would you handle the situation politely with the vendor?",
+                "What steps would you take to avoid escalating the situation in a busy marketplace?",
+                "What measures would you take to check pricing before making purchases in the future?",
+                "How would you handle it if the vendor refuses to resolve the issue?"
+            ]
+        },
+        {
+            "id": "12",
+            "name": "Preparing for a public speech",
+            "scenario": "You're asked to give a speech at an important event.",
+            "questions": [
+                "How do you prepare your speech content?",
+                "What do you do to manage your nerves before speaking?",
+                "How do you engage the audience during your speech?",
+                "How do you handle unexpected questions or interruptions during the speech?",
+                "Describe how you feel after delivering the speech."
+            ]
+        },
+        {
+            "id": "13",
+            "name": "Parenting",
+            "scenario": "Your child comes home upset after being bullied at school.",
+            "questions": [
+                "How would you approach your child to understand what happened?",
+                "What steps would you take to support their emotional well-being?",
+                "How would you address the issue with their teacher or school administration?",
+                "How would you teach your child to handle such situations in the future?",
+                "What proactive measures would you take to create a safe environment for them?"
+            ]
+        },
+        {
+            "id": "14",
+            "name": "Health crisis",
+            "scenario": "Imagine you or a close family member are facing a sudden health issue that requires immediate attention.",
+            "questions": [
+                "How do you prioritize your responsibilities while ensuring your family member gets the care they need?",
+                "What strategies do you use to stay emotionally resilient and support your family during this challenging time?",
+                "How do you research and decide on the best medical care or treatment options?",
+                "What steps do you take to communicate effectively with healthcare professionals and family members?"
+            ]
+        },
+        {
+            "id": "15",
+            "name": "Hosting a party",
+            "scenario": "You're hosting a party for friends and family at your home.",
+            "questions": [
+                "How do you decide on the theme or activities for the party?",
+                "What do you do to ensure everyone feels comfortable?",
+                "How do you handle last-minute changes or issues during the party?",
+                "Describe how you feel once the party is over."
+            ]
+        }
+    ]
+}

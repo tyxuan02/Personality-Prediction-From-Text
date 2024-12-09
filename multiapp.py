@@ -18,7 +18,7 @@ class MultiApp:
         selected = option_menu(
             menu_title=None,
             options=[app["title"] for app in self.apps],
-            icons=["house-door-fill", "list", "info-circle-fill"],
+            icons=["house-door", "pencil-square", "list", "info-circle"],
             default_index=0,
             orientation="horizontal"
         )

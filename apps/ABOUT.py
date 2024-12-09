@@ -58,7 +58,6 @@ def app():
 
     - Analyzing natural language patterns in your writing
     - Providing quick insights into personality traits
-    - Offering a more organic way to understand personality through everyday communication
     - Leveraging machine learning to identify subtle patterns that might not be apparent in traditional assessments
     </div>
     """, unsafe_allow_html=True)
@@ -82,11 +81,10 @@ def app():
     st.markdown("""
     <div class="section-text">
 
-    This system utilizes:
+    <b>This system utilizes:</b>
 
     - BERT (Bidirectional Encoder Representations from Transformers), a state-of-the-art natural language processing model
-    - Training data from the [MBTI 500 dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset). Initially, the dataset was unbalanced, but it was balanced using oversampling techniques.
-    - Achievement of ?% accuracy in validation tests
+    - Training data from the [MBTI 500 dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset). The data imbalance issue in the dataset was addressed using oversampling and undersampling techniques.
     </div>
     """, unsafe_allow_html=True)
 
@@ -95,7 +93,7 @@ def app():
     <div class="section-text">
 
     <b>1. Text Input Method:</b>
-    - Enter a text sample (minimum 20 words)
+    - Enter a text sample (between 100 and 250 words)
     - The text can be any form of writing (emails, social media posts, essays, etc.)
     - Click the "Predict" button to get the predicted personality type
 
@@ -109,31 +107,17 @@ def app():
     st.markdown('<div class="section-heading">What are the limitations and considerations?</div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="section-text">
-
-    <b>1. Accuracy Considerations:</b>
-    - While our model achieves good accuracy, it's not 100% definitive
-    - Results should be considered as insights rather than absolute determinations
-    - For a comprehensive assessment, consider taking the official MBTI test at 16personalities.com
-
-    <b>2. Best Practices:</b>
+                
+    <b>1. Best Practices:</b>
     - Provide genuine text samples for more accurate results
-    - Use text samples of sufficient length (20+ words)
-    - Consider multiple analyses for more reliable insights
-
-    <b>3. Not Suitable For:</b>
+    - Use text samples of sufficient length (100 - 250 words)
+    - Consider multiple text samples for a better understanding of your personality 
+                
+    <b>2. Not Suitable For:</b>
     - Clinical or diagnostic purposes
     - Major life decisions without additional assessment
     - Legal or professional evaluation requirements
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="section-heading">Can I improve the accuracy of my results?</div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div class="section-text">
-
-    - Provide longer text samples (80 to 100 words is ideal)
-    - Use your natural writing style
-    - Submit multiple different text samples
+                
     </div>
     """, unsafe_allow_html=True)
 
@@ -143,17 +127,5 @@ def app():
 
     - All text analysis is performed locally
     - Your submitted text is not stored or saved
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown('<div class="section-heading">How reliable are the results?</div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div class="section-text">
-
-    - The model achieve ?% accuracy in validation tests
-    - However, results are not guaranteed to be accurate
-    - They are based on statistical patterns and probabilities
-    - Use the results as a guide, not a definitive assessment
-    - For a more comprehensive evaluation, consider taking the [official MBTI test](https://www.16personalities.com/)
     </div>
     """, unsafe_allow_html=True)

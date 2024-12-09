@@ -29,8 +29,8 @@ def app():
             }
             .result-subheading {
                 font-size: 1.5em;
-                color: #4B0082;
-                margin-bottom: 1em;
+                color: #6A5ACD;
+                margin: 1em 0;
                 font-weight: 600;
             }
             .mbti-type-title {
@@ -43,18 +43,28 @@ def app():
                 text-align: justify;
             }
             .mbti-view-details {
-                display: block;
-                margin-top: 1em;
+                color: #2E86C1;
+                text-decoration: none;
+                font-weight: bold;
+                display: inline-block;
+                margin-top: 0.5em;
             }
             .trait-label {
                 font-size: 1.1em;
                 # font-weight: 600;
             }
             .trait-box {
-                margin: 0.5em 0;
-                padding: 1em;
-                border-radius: 8px;
-                color: white;
+                background-color: #f0f0f5;
+                color: #ffffff;
+                padding: 20px;
+                border-radius: 20px;
+                margin: 10px 0;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+            .trait-box:hover {
+                transform: scale(1.03);
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
             }
         </style>
     """, unsafe_allow_html=True)
@@ -81,27 +91,22 @@ def app():
     option = st.selectbox('Select input type:', ('Text', 'CSV or Excel File'), index=0)
 
     if option == 'Text':
-        st.info(f"Please enter a text between 20 and 150 words. Words between 100 - 120 are ideal for better predictions. Ensure the text is in English and does not include any numbers.")
+        st.info(f"Please enter a text between 100 and 250 words. Text with around 200 words is ideal for better predictions. Ensure the text is in English and does not include any numbers.")
         txt = st.text_area(label="Input Text", placeholder="Enter your text here...", height=200)
         words = txt.split()
 
         col1, col2 = st.columns([1, 1])
         with col1:
             predict_button = st.button("Predict", key="predict_button")
-            # generate_text = st.button("Generate Random Text", key="generate_text_button")
         with col2:
-            # Display word count
             num_words = len(words)
-            st.markdown(f"<div style='text-align: right;'>Number of words: {num_words}</div>", unsafe_allow_html=True)
-
-        # if generate_text:
-        #     st.switch_page(page="pages/2_MBTI.py")
+            st.markdown(f"<div style='text-align: right;'>Word Count: {num_words}</div>", unsafe_allow_html=True)
 
         if predict_button:
             # Check if all words digits
             if all(word.isdigit() for word in words):
                 st.error("Please enter a text without any numbers.")
-            elif 20 <= num_words <= 150:
+            elif 100 <= num_words <= 250:
                 st.write("---------")
                 with st.spinner("Analyzing your text..."):
                     probs, binary_predictions, predicted_mbti_type = predictor.predict(txt)
@@ -142,7 +147,7 @@ def app():
                     st.markdown(f'<div class="trait-label">{trait_name}</div>', unsafe_allow_html=True)
                     st.markdown(f'<div class="trait-box" style="background-color: {trait_color};">{trait_desc}</div>', unsafe_allow_html=True)        
             else:
-                st.error("Please enter a text between 20 and 150 words.")
+                st.error("Please enter a text between 100 and 250 words.")
     elif option == 'CSV or Excel File':
         uploaded_file = st.file_uploader("Choose a CSV or Excel file", type=["csv", "xlsx"], accept_multiple_files=False)
         if uploaded_file is not None:
@@ -165,13 +170,13 @@ def app():
                     with st.spinner("Analyzing..."):
                         predictions = [
                             predictor.predict(row[column_name])[2] if (isinstance(row[column_name], str) and len(row[column_name].split()) > 19 and len(row[column_name].split()) < 151)
-                            else "Text length not between 20 and 150 words"
+                            else "Text length not between 100 and 250 words"
                             for _, row in df.iterrows()
                         ]
                     df['Predicted MBTI Type'] = predictions
                     st.markdown(f'<div class="result-subheading">Predicted MBTI Types for All Rows:</div>', unsafe_allow_html=True)
                     st.dataframe(df[[column_name, 'Predicted MBTI Type']], width=800)
-                    valid_predictions = [p for p in predictions if p != "Text length not between 20 and 150 words"]
+                    valid_predictions = [p for p in predictions if p != "Text length not between 100 and 250 words"]
                     if valid_predictions:
                         overall_mbti = Counter(valid_predictions).most_common(1)[0][0]
 
