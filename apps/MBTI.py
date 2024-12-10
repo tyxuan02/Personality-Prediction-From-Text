@@ -34,11 +34,10 @@ def app():
                 font-size: 2.5em;
                 color: #4B0082;
                 font-weight: 700;
-                margin-bottom: 1em; 
+                margin-bottom: 20px;
             }
             .subheading-style {
-                font-size: 1.7em;
-                font-weight: 700;
+                font-size: 1.3em;
                 color: #6A5ACD;
                 margin-top: 20px;
             }
@@ -70,7 +69,7 @@ def app():
             }
             .mbti-type-box {
                 height: max-content;
-                margin: 1em 0;
+                margin: 10px 0;
                 display: flex;
                 flex-direction: column;
                 padding: 1.5em;

@@ -8,13 +8,9 @@ def app():
                 font-size: 2.5em;
                 color: #4B0082;
                 font-weight: bold;
-                text-align: center;
-                margin-top: 20px;
-                margin-bottom: 20px;
             }
             .section-heading {
-                font-size: 1.8em;
-                font-weight: bold;
+                font-size: 1.3em;
                 color: #6A5ACD;
                 margin-top: 30px;
                 margin-bottom: 10px;
@@ -22,7 +18,7 @@ def app():
             .section-text {
                 color: #333333;
                 text-align: justify;
-                margin-bottom: 20px;
+                margin-bottom: 30px
             }
             .disclaimer-text {
                 font-size: 1em;
@@ -50,17 +46,17 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="section-heading">What is the purpose of this system?</div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div class="section-text">
+    # st.markdown('<div class="section-heading">What is the purpose of this system?</div>', unsafe_allow_html=True)
+    # st.markdown("""
+    # <div class="section-text">
 
-    Traditional personality assessments typically rely on standardized questionnaires, which can be time-consuming and may be influenced by self-reporting bias. This system offers an alternative approach by:
+    # Traditional personality assessments typically rely on standardized questionnaires, which can be time-consuming and may be influenced by self-reporting bias. This system offers an alternative approach by:
 
-    - Analyzing natural language patterns in your writing
-    - Providing quick insights into personality traits
-    - Leveraging machine learning to identify subtle patterns that might not be apparent in traditional assessments
-    </div>
-    """, unsafe_allow_html=True)
+    # - Analyzing natural language patterns in your writing
+    # - Providing quick insights into personality traits
+    # - Leveraging machine learning to identify subtle patterns that might not be apparent in traditional assessments
+    # </div>
+    # """, unsafe_allow_html=True)
 
     st.markdown('<div class="section-heading">What is MBTI and how does it work?</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -77,14 +73,12 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="section-heading">What technology powers this tool?</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-heading">What machine learning model and data are used?</div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="section-text">
 
-    <b>This system utilizes:</b>
-
-    - BERT (Bidirectional Encoder Representations from Transformers), a state-of-the-art natural language processing model
-    - Training data from the [MBTI 500 dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset). The data imbalance issue in the dataset was addressed using oversampling and undersampling techniques.
+    - A pre-trained BERT model is fine-tuned on MBTI personality data to predict personality types based on text input.
+    - A [MBTI Dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset) from Kaggle was used for training the model. The data imbalance issue in the dataset was addressed using oversampling and undersampling techniques.
     </div>
     """, unsafe_allow_html=True)
 
@@ -115,9 +109,7 @@ def app():
                 
     <b>2. Not Suitable For:</b>
     - Clinical or diagnostic purposes
-    - Major life decisions without additional assessment
     - Legal or professional evaluation requirements
-                
     </div>
     """, unsafe_allow_html=True)
 

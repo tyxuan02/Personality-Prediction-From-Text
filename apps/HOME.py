@@ -17,26 +17,26 @@ def app():
                 font-weight: 700;
             }
             .subheading-style {
-                font-size: 1.5em;
+                font-size: 1.3em;
                 color: #6A5ACD;
-                margin-bottom: 2em; 
+                margin-bottom: 20px;
             }
             .result-style {
                 font-size: 2em;
                 color: #4B0082;
-                margin-bottom: 1em;
+                margin-bottom: 20px;
                 font-weight: bold;
             }
             .result-subheading {
                 font-size: 1.5em;
                 color: #6A5ACD;
-                margin: 1em 0;
+                margin: 20px 0;
                 font-weight: 600;
             }
             .mbti-type-title {
                 font-weight: bold;
                 font-size: 20px;
-                margin-bottom: 0.5em;
+                margin-bottom: 10px;
             }
             .mbti-desc {
                 display: block;
@@ -47,7 +47,7 @@ def app():
                 text-decoration: none;
                 font-weight: bold;
                 display: inline-block;
-                margin-top: 0.5em;
+                margin-top: 10px;
             }
             .trait-label {
                 font-size: 1.1em;
@@ -84,7 +84,7 @@ def app():
     outputs = load_output()
 
     # Header Section
-    st.markdown('<div class="title-style">🔮 Personality Predictor</div>', unsafe_allow_html=True)
+    st.markdown('<div class="title-style">Personality Predictor</div>', unsafe_allow_html=True)
     st.markdown('<div class="subheading-style">Discover Your MBTI Personality Type</div>', unsafe_allow_html=True)
 
     # Input type selection
@@ -198,12 +198,3 @@ def app():
                         st.error("No valid predictions found. Please check the text length and try again.")
             elif column_name:
                 st.error(f"Column '{column_name}' not found in the file. Please check the column name and try again.")
-    # # Footer Section
-    # st.write("---------")
-    # st.markdown(
-    #     """
-    #     <div style="text-align: center; color: #8A8A8A; font-size: 0.9em;">
-    #         Powered by advanced NLP algorithms &mdash; providing accurate MBTI predictions for curious minds! 💡
-    #     </div>
-    #     """, unsafe_allow_html=True
-    # )
