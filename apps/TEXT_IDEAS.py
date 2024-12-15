@@ -25,6 +25,10 @@ def app():
                 color: #6A5ACD;
                 margin-top: 5px;
             }
+            .result-style {
+                margin-bottom: 20px;
+                text-align: justify;
+            }
             .scenario {
                 color: #333333;
                 font-size: 1.1em;
@@ -64,6 +68,7 @@ def app():
         if generated_text:
             st.write("---")
             st.markdown('<div class="subheading-style">Generated Text:</div>', unsafe_allow_html=True)
-            st.write(generated_text)
+            st.markdown(f"<div class='result-style'>{generated_text}</div>", unsafe_allow_html=True)
+            st.markdown(f"<b>Word Count:</b> {len(generated_text.split())}", unsafe_allow_html=True)
         else:
             st.error("Please provide answers to the questions to generate text.")

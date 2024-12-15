@@ -6,13 +6,15 @@ from utils import preprocess_text, bert_tokenize
 
 class Model:
     def __init__(self):
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', clean_up_tokenization_spaces=False)
         self.model = BertWithCustomClassifier(BertConfig.from_pretrained('bert-base-uncased', num_labels=4))
-        self.model.load_state_dict(torch.load('best_model.pth', map_location=torch.device('cpu')))
+        self.model.load_state_dict(torch.load('best_model.pth', map_location=torch.device('cpu'), weights_only=True))
         self.model.eval()
 
     def predict(self, text):
         cleaned_text = preprocess_text(text)
+        print(cleaned_text)
+        print(len(cleaned_text.split()))
         input_ids, attention_mask = bert_tokenize(self.tokenizer, cleaned_text)
         with torch.no_grad():
             outputs = self.model(input_ids, attention_mask=attention_mask)

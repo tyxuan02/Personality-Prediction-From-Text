@@ -3,9 +3,9 @@
         {
             "id": "0",
             "name": "Working on a group project",
-            "scenario": "You're assigned to work on a group project with people you've never worked with before.",
+            "scenario": "You're assigned to work on a group project with people you've never worked with before and you are the group leader.",
             "questions": [
-                "How do you approach dividing tasks among the group?",
+                "How do you divide tasks among group members?",
                 "What do you do to ensure effective communication?",
                 "How do you handle a disagreement within the group?",
                 "Describe how you contribute to the team's success.",
