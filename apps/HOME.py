@@ -91,7 +91,7 @@ def app():
     option = st.selectbox('Select input type:', ('Text', 'CSV or Excel File'), index=0)
 
     if option == 'Text':
-        st.info(f"Please provide a text containing 50 to 300 words. For better results, a text of around 200 words is recommended. Ensure the text is written in English.")
+        st.info(f"Please provide a text containing 50 to 250 words. For better results, a text of around 200 words is recommended. Ensure the text is written in English.")
         txt = st.text_area(label="Input Text", placeholder="Enter your text here...", height=200)
         words = txt.split()
 
@@ -106,7 +106,7 @@ def app():
             # Check if all words digits
             if all(word.isdigit() for word in words):
                 st.error("Please enter a text without any numbers.")
-            elif 50 <= num_words <= 300:
+            elif 50 <= num_words <= 250:
                 st.write("---------")
                 with st.spinner("Analyzing your text..."):
                     probs, binary_predictions, predicted_mbti_type = predictor.predict(txt)

@@ -1,13 +1,14 @@
-# model_predictor.py
+import warnings
+warnings.filterwarnings("ignore")
 import torch
-from transformers import BertTokenizer, BertConfig, BertModel, BertPreTrainedModel
+from transformers import BertTokenizer, BertConfig, BertModel, BertPreTrainedModel, BertForSequenceClassification
 import torch.nn as nn
 from utils import preprocess_text, bert_tokenize
 
 class Model:
     def __init__(self):
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', clean_up_tokenization_spaces=False)
-        self.model = BertWithCustomClassifier(BertConfig.from_pretrained('bert-base-uncased', num_labels=4))
+        self.model = BertWithCustomClassifier(BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=4).config)
         self.model.load_state_dict(torch.load('best_model.pth', map_location=torch.device('cpu'), weights_only=True))
         self.model.eval()
 
