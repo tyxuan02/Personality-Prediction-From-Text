@@ -4,23 +4,32 @@ import torch
 from transformers import BertTokenizer, BertConfig, BertModel, BertPreTrainedModel, BertForSequenceClassification
 import torch.nn as nn
 from utils import preprocess_text, bert_tokenize
+from huggingface_hub import hf_hub_download
 
 class Model:
     def __init__(self):
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', clean_up_tokenization_spaces=False)
-        self.model = BertWithCustomClassifier(BertForSequenceClassification.from_pretrained('bert-base-uncased', num_labels=4).config)
-        self.model.load_state_dict(torch.load('best_model.pth', map_location=torch.device('cpu'), weights_only=True))
+        self.model = BertForSequenceClassification.from_pretrained(
+            "bert-base-uncased",
+            num_labels=4,  # Number of output labels
+            output_attentions=False,
+            output_hidden_states=False,
+            hidden_dropout_prob=0.5
+        )
+        model_path = hf_hub_download(repo_id="Xuan5251/mbti_personality_prediction", filename="mbti_model.pth")
+        self.model.load_state_dict(torch.load(model_path, map_location=torch.device('cpu'), weights_only=True))
         self.model.eval()
 
     def predict(self, text):
         cleaned_text = preprocess_text(text)
-        print(cleaned_text)
-        print(len(cleaned_text.split()))
         input_ids, attention_mask = bert_tokenize(self.tokenizer, cleaned_text)
         with torch.no_grad():
-            outputs = self.model(input_ids, attention_mask=attention_mask)
-            probs = outputs[1]
-        
+            # outputs = self.model(input_ids, attention_mask=attention_mask)
+            # probs = outputs[1]
+            outputs = self.model(input_ids, attention_mask)
+
+        logits = outputs.logits
+        probs = torch.sigmoid(logits)
         # Convert probabilities to binary (0 or 1) using a threshold of 0.5
         binary_predictions = (probs > 0.5).int()
 
