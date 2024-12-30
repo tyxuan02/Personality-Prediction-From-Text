@@ -62,8 +62,8 @@ def app():
         answer = st.text_area(label=question, key=idx, label_visibility='collapsed')
         user_answers.append(answer)
 
-    combine_text_button = st.button("Combine Text")
-    if combine_text_button:
+    create_button = st.button("Create")
+    if create_button:
         generated_text = " ".join([answer.strip() for answer in user_answers if answer.strip()])
         if generated_text:
             st.write("---")

@@ -46,17 +46,17 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
-    # st.markdown('<div class="section-heading">What is the purpose of this system?</div>', unsafe_allow_html=True)
-    # st.markdown("""
-    # <div class="section-text">
+    st.markdown('<div class="section-heading">What is the purpose of this system?</div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="section-text">
 
-    # Traditional personality assessments typically rely on standardized questionnaires, which can be time-consuming and may be influenced by self-reporting bias. This system offers an alternative approach by:
+    Traditional personality assessments typically rely on standardized questionnaires, which can be time-consuming and may be influenced by self-reporting bias. This system offers an alternative approach by:
 
-    # - Analyzing natural language patterns in your writing
-    # - Providing quick insights into personality traits
-    # - Leveraging machine learning to identify subtle patterns that might not be apparent in traditional assessments
-    # </div>
-    # """, unsafe_allow_html=True)
+    - Analyzing natural language patterns in your writing
+    - Providing quick insights into personality traits
+    - Leveraging machine learning to identify subtle patterns that might not be apparent in traditional assessments
+    </div>
+    """, unsafe_allow_html=True)
 
     st.markdown('<div class="section-heading">What is MBTI and how does it work?</div>', unsafe_allow_html=True)
     st.markdown("""
@@ -78,7 +78,7 @@ def app():
     <div class="section-text">
 
     - A pre-trained BERT model is fine-tuned on MBTI personality data to predict personality types based on text input.
-    - A [MBTI Dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset) from Kaggle was used for training the model. The data imbalance issue in the dataset was addressed using oversampling and undersampling techniques.
+    - A [MBTI Dataset](https://www.kaggle.com/datasets/zeyadkhalid/mbti-personality-types-500-dataset) from Kaggle was used for training the model. The data imbalance issue in the dataset was addressed using oversampling, undersampling and data augmentation techniques.
     </div>
     """, unsafe_allow_html=True)
 

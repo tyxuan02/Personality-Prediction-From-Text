@@ -1,9 +1,6 @@
 import streamlit as st
 import json
 import base64
-from pathlib import Path
-import os
-import re
 
 @st.cache_resource()
 def load_output():
@@ -11,7 +8,6 @@ def load_output():
         return json.load(f)
     
 def render_svg(svg_file):
-
     with open(svg_file, "r") as f:
         lines = f.readlines()
         svg = "".join(lines)

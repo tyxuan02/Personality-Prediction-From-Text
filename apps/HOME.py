@@ -2,7 +2,7 @@ import streamlit as st
 import json 
 import pandas as pd
 from collections import Counter
-from model_predictor import Model  # Import the model class
+from model_predictor import Model
 
 def app():
     # Custom CSS for styling
@@ -105,7 +105,7 @@ def app():
         if predict_button:
             # Check if all words digits
             if all(word.isdigit() for word in words):
-                st.error("Please enter a text without any numbers.")
+                st.error("Please provide text instead of numbers.")
             elif 50 <= num_words <= 250:
                 st.write("---------")
                 with st.spinner("Analyzing your text..."):
@@ -159,7 +159,6 @@ def app():
             if df.empty:
                 st.error("The uploaded file is empty. Please upload a valid file.")
             else:
-                # st.write(f"File uploaded: {uploaded_file.name}")
                 st.write("Data Preview:")
                 st.dataframe(df, width=800)
 
@@ -169,7 +168,6 @@ def app():
                     st.write("---------")
                     with st.spinner("Analyzing..."):
                         predictions = [
-                            # predictor.predict(row[column_name])[2] if (isinstance(row[column_name], str) and len(row[column_name].split()) > 99 and len(row[column_name].split()) < 251)
                             predictor.predict(row[column_name])[2] if (isinstance(row[column_name], str))
                         else "Text length is less than 50 words."
                             for _, row in df.iterrows()

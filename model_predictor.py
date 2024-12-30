@@ -1,7 +1,7 @@
 import warnings
 warnings.filterwarnings("ignore")
 import torch
-from transformers import BertTokenizer, BertConfig, BertModel, BertPreTrainedModel, BertForSequenceClassification
+from transformers import BertTokenizer, BertForSequenceClassification
 import torch.nn as nn
 from utils import preprocess_text, bert_tokenize
 from huggingface_hub import hf_hub_download
@@ -11,7 +11,7 @@ class Model:
         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased', clean_up_tokenization_spaces=False)
         self.model = BertForSequenceClassification.from_pretrained(
             "bert-base-uncased",
-            num_labels=4,  # Number of output labels
+            num_labels=4,
             output_attentions=False,
             output_hidden_states=False,
             hidden_dropout_prob=0.5
@@ -24,13 +24,10 @@ class Model:
         cleaned_text = preprocess_text(text)
         input_ids, attention_mask = bert_tokenize(self.tokenizer, cleaned_text)
         with torch.no_grad():
-            # outputs = self.model(input_ids, attention_mask=attention_mask)
-            # probs = outputs[1]
             outputs = self.model(input_ids, attention_mask)
 
         logits = outputs.logits
         probs = torch.sigmoid(logits)
-        # Convert probabilities to binary (0 or 1) using a threshold of 0.5
         binary_predictions = (probs > 0.5).int()
 
         # Define the mapping for each MBTI dimension
@@ -53,41 +50,3 @@ class Model:
         predicted_mbti_type = "".join(predicted_traits)
 
         return probs, binary_predictions, predicted_mbti_type
-        
-class BertWithCustomClassifier(BertPreTrainedModel):
-    def __init__(self, config):
-        super().__init__(config)
-        self.num_labels = config.num_labels
-        
-        # BERT base model
-        self.bert = BertModel(config)
-        
-        # Single linear layer for classification
-        self.classifier = nn.Sequential(
-            nn.Linear(config.hidden_size, config.num_labels),
-            nn.Sigmoid()
-        )
-        
-        self.init_weights()
-    
-    def forward(self, 
-                input_ids=None, 
-                attention_mask=None, 
-                token_type_ids=None,
-                labels=None):
-        
-        outputs = self.bert(
-            input_ids,
-            attention_mask=attention_mask,
-            token_type_ids=token_type_ids
-        )
-        
-        pooled_output = outputs[1]
-        logits = self.classifier(pooled_output)
-    
-        loss = None
-        if labels is not None:
-            loss_fct = nn.BCELoss()
-            loss = loss_fct(logits, labels.float())
-            
-        return loss, logits if loss is not None else logits
