@@ -1,8 +1,5 @@
-import warnings
-warnings.filterwarnings("ignore")
 import torch
 from transformers import BertTokenizer, BertForSequenceClassification
-import torch.nn as nn
 from utils import preprocess_text, bert_tokenize
 from huggingface_hub import hf_hub_download
 

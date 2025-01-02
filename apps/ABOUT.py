@@ -87,7 +87,7 @@ def app():
     <div class="section-text">
 
     <b>1. Text Input Method:</b>
-    - Enter a text sample (between 100 and 250 words)
+    - Enter a text sample (between 50 and 250 words)
     - The text can be any form of writing (emails, social media posts, essays, etc.)
     - Click the "Predict" button to get the predicted personality type
 
@@ -98,18 +98,12 @@ def app():
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="section-heading">What are the limitations and considerations?</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-heading">What are the limitations of this tool?</div>', unsafe_allow_html=True)
     st.markdown("""
     <div class="section-text">
-                
-    <b>1. Best Practices:</b>
-    - Provide genuine text samples for more accurate results
-    - Use text samples of sufficient length (100 - 250 words)
-    - Consider multiple text samples for a better understanding of your personality 
-                
-    <b>2. Not Suitable For:</b>
-    - Clinical or diagnostic purposes
-    - Legal or professional evaluation requirements
+
+    - The tool is currently limited to English-language text input
+    - The model may not always accurately predict the correct personality type
     </div>
     """, unsafe_allow_html=True)
 
@@ -117,7 +111,7 @@ def app():
     st.markdown("""
     <div class="section-text">
 
-    - All text analysis is performed locally
+    - All data is processed on the client-side (your browser)
     - Your submitted text is not stored or saved
     </div>
     """, unsafe_allow_html=True)

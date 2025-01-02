@@ -58,8 +58,6 @@ def preprocess_text(text):
     # Remove extra whitespaces
     text = " ".join(text.split())
 
-    # return text
-
     # Tokenization
     text = word_tokenize(text)
 

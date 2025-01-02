@@ -103,8 +103,9 @@ def app():
             st.markdown(f"<div style='text-align: right;'><b>Word Count:</b> {num_words}</div>", unsafe_allow_html=True)
 
         if predict_button:
-            # Check if all words digits
-            if all(word.isdigit() for word in words):
+            if not txt or not txt.strip():
+                st.error("Please enter some text to predict.")
+            elif all(word.isdigit() for word in words):
                 st.error("Please provide text instead of numbers.")
             elif 50 <= num_words <= 250:
                 st.write("---------")
