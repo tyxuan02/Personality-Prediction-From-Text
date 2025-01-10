@@ -101,49 +101,49 @@
     {
       "trait": "I",
       "color": "#A40606",
-      "name": "Introversion(I)",
+      "name": "Introversion (I)",
       "description": "Introverts are reserved, private, and prefer a slower pace with time for contemplation. They tend to process thoughts internally and would rather observe than be the center of attention."
     },
     {
       "trait": "E",
       "color": "#5A0002",
-      "name": "Extroversion(E)",
+      "name": "Extroversion (E)",
       "description": "Extraverts prefer to be outgoing, talkative, and enjoy being the center of attention. They enjoy fast-paced environments, tend to work out ideas by talking them through with others, and often think out loud."
     },
     {
       "trait": "N",
       "color": "#AA4465",
-      "name": "Intuition(N)",
+      "name": "Intuition (N)",
       "description": "Intuitive individuals are curious, adaptable, and have an insatiable curiosity. They enjoy exploring new things, discovering new things, and are curious about the world around them. They notice the big picture, see how everything connects, and tend to describe things in a figurative or poetic way."
     },
     {
       "trait": "S",
       "color": "#613F75",
-      "name": "Sensing(S)",
+      "name": "Sensing (S)",
       "description": "Sensing individuals are practical, realistic, and observant. They focus on the reality of how things are, pay attention to concrete facts and details, and prefer ideas that have practical applications. They like to describe things in a literal and specific way."
     },
     {
       "trait": "T",
       "color": "#06AED5",
-      "name": "Thinking(T)",
+      "name": "Thinking (T)",
       "description": "Thinking individuals are objective, rational, and logical. They make decisions based on facts, evidence, and logic. They value honesty, consistency, and fairness. They tend to approach situations in an impersonal way and are often described as reasonable and level-headed."
     },
     {
       "trait": "F",
       "color": "#086788",
-      "name": "Feeling(F)",
+      "name": "Feeling (F)",
       "description": "Feeling individuals are sensitive, empathetic, and emotionally expressive. They are more likely to make decisions based on their values, beliefs, and emotions. They value harmony, compassion, and personal values. They tend to approach situations in a personal way and are often described as warm and empathetic."
     },
     {
       "trait": "J",
       "color": "#6D676E",
-      "name": "Judging(J)",
+      "name": "Judging (J)",
       "description": "Judging individuals are organized, responsible, and reliable. They prefer to plan things in advance and tend to follow rules and schedules. They value structure, order, and predictability. They appreciate planning and prefer to know what to expect."
     },
     {
       "trait": "P",
       "color": "#1B1B1E",
-      "name": "Perceiving(P)",
+      "name": "Perceiving (P)",
       "description": "Perceiving individuals are flexible, spontaneous, and adaptable. They prefer to leave their options open and are comfortable with last-minute changes. They value freedom, creativity, and new experiences. They appreciate spontaneity and prefer to go with the flow."
     }
   ]
