@@ -5,76 +5,10 @@ from collections import Counter
 from model_predictor import Model
 
 def app():
-    # Custom CSS for styling
-    st.markdown("""
-        <style>
-            button[title="View fullscreen"] {
-                visibility: hidden;
-            }
-            .title-style {
-                font-size: 2.5em;
-                color: #4B0082;
-                font-weight: 700;
-            }
-            .subheading-style {
-                font-size: 1.3em;
-                color: #6A5ACD;
-                margin-bottom: 20px;
-            }
-            .result-style {
-                font-size: 2em;
-                color: #4B0082;
-                margin-bottom: 20px;
-                font-weight: bold;
-            }
-            .result-subheading {
-                font-size: 1.5em;
-                color: #6A5ACD;
-                margin: 20px 0;
-                font-weight: 600;
-            }
-            .mbti-type-title {
-                font-weight: bold;
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-            .mbti-desc {
-                display: block;
-                text-align: justify;
-            }
-            .mbti-view-details {
-                color: #2E86C1;
-                text-decoration: none;
-                font-weight: bold;
-                display: inline-block;
-                margin-top: 10px;
-            }
-            .trait-label {
-                font-size: 1.1em;
-                # font-weight: 600;
-            }
-            .trait-box {
-                background-color: #f0f0f5;
-                color: #ffffff;
-                padding: 20px;
-                border-radius: 20px;
-                margin: 10px 0;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            }
-            .trait-box:hover {
-                transform: scale(1.03);
-                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
-    # Load the model
     @st.cache_resource()
     def load_model():
         return Model()
 
-    # Load the output
     @st.cache_resource()
     def load_output():
         with open('custom_output.json', encoding='utf-8') as f:
@@ -83,25 +17,275 @@ def app():
     predictor = load_model()
     outputs = load_output()
 
-    # Header Section
-    st.markdown('<div class="title-style">Personality Predictor</div>', unsafe_allow_html=True)
-    st.markdown('<div class="subheading-style">Discover Your MBTI Personality Type</div>', unsafe_allow_html=True)
+    st.markdown("""
+        <style>
+            /* Global Styles */
+            .stApp {
+                background: linear-gradient(135deg, #f5f7fa 0%, #f8f9fa 100%);
+            }
+            
+            /* Hide fullscreen button */
+            button[title="View fullscreen"] {
+                visibility: hidden;
+            }
+            
+            /* Main Title Styling */
+            .title {
+                font-size: 3em;
+                background: linear-gradient(120deg, #4B0082, #6A5ACD);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-weight: 800;
+                text-align: center;
+                word-wrap: break-word;
+                animation: fadeIn 1s ease-in;
+            }
+            
+            /* Subheading Styling */
+            .subheading {
+                font-size: 1.5em;
+                color: #6A5ACD;
+                margin-bottom: 30px;
+                text-align: center;
+                font-weight: 500;
+                animation: slideIn 1s ease-out;
+            }
+            
+            /* Result Styling */
+            .result-style {
+                font-size: 2.2em;
+                background: linear-gradient(120deg, #4B0082, #6A5ACD);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                margin-bottom: 25px;
+                font-weight: bold;
+                text-align: center;
+            }
+            
+            .result-subheading {
+                font-size: 1.7em;
+                color: #4B0082;
+                margin: 25px 0;
+                font-weight: 600;
+                border-bottom: 2px solid #6A5ACD;
+                padding-bottom: 10px;
+            }
+            
+            /* MBTI Type Styling */
+            .mbti-type-title {
+                font-weight: bold;
+                font-size: 24px;
+                margin-bottom: 15px;
+                color: #4B0082;
+            }
+            
+            .mbti-desc {
+                display: block;
+                text-align: justify;
+                line-height: 1.6;
+                color: #2C3E50;
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            
+            .mbti-view-details {
+                text-decoration: none;
+                display: inline-block;
+                margin-top: 5px;
+                padding: 8px 16px;
+                transition: all 0.3s ease;
+            }
+            
+            .mbti-view-details:hover {
+                transform: translateY(-2px);
+            }
+            
+            /* Trait Styling */
+            .trait-label {
+                font-size: 1.2em;
+                font-weight: 600;
+                color: #4B0082;
+                margin-top: 15px;
+            }
+            
+            .trait-box {
+                background-color: #f0f0f5;
+                color: #ffffff;
+                padding: 20px;
+                border-radius: 20px;
+                margin: 10px 0;
+                text-align: justify;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            }
+            
+            .trait-box:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+            }
+                
+            /* Text Field Styling */
+            .stTextInput input {
+                border-radius: 10px;
+                border: 2px solid #E0E0E0;
+                padding: 15px;
+                font-size: 16px;
+            }
+                
+            .stTextInput input:focus {
+                border: 2px solid #6A5ACD;
+                box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
+            }
+            
+            /* Input Area Styling */
+            .stTextArea textarea {
+                border-radius: 10px;
+                border: 2px solid #E0E0E0;
+                padding: 15px;
+                font-size: 16px;
+                text-align: justify;
+            }
+            
+            .stTextArea textarea:focus {
+                border: 2px solid #6A5ACD;
+                box-shadow: 0 0 0 2px rgba(106, 90, 205, 0.2);
+            }
+            
+            /* Button Styling */
+            .stButton button {
+                background: linear-gradient(135deg, #4B0082, #6A5ACD);
+                color: white !important;
+                border: none;
+                padding: 10px 25px;
+                border-radius: 25px;
+                font-weight: 600;
+                transition: all 0.3s ease;
 
-    # Input type selection
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(106, 90, 205, 0.3);
+                }
+            }
+            
+            /* File Uploader Styling */
+            .stFileUploader {
+                background: white;
+                border-radius: 10px;
+                padding: 20px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                transition: all 0.3s ease;
+            }
+            
+            /* File Upload Button Styling */
+            .stFileUploader > section > button {
+                background: linear-gradient(135deg, #4B0082, #6A5ACD);
+                color: white !important;
+                border: none;
+                padding: 10px 25px;
+                border-radius: 25px;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(106, 90, 205, 0.3);
+                }
+
+                &:active {
+                    transform: translateY(0);
+                    box-shadow: none;
+                }
+            }
+            
+            /* DataFrame Styling */
+            .stDataFrame {
+                background: white;
+                border-radius: 10px;
+                padding: 10px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+                
+            /* Divider Styling */
+            .stMarkdown hr {
+                border: none;
+                height: 2px;
+                background: linear-gradient(to right, transparent, #6A5ACD, transparent);
+                margin: 30px 0;
+            }
+            
+            /* Animations */
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            @keyframes slideIn {
+                from { 
+                    transform: translateY(-20px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+                
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-10px); }
+                75% { transform: translateX(10px); }
+            }
+            
+            /* Error Message Styling */
+            .stAlert {
+                animation: shake 0.5s ease-in-out;
+            }
+            
+            /* Selectbox Styling */
+            .stSelectbox {
+                margin-bottom: 20px;
+            }
+            
+            .stSelectbox > div > div {
+                background: white;
+                border-radius: 10px;
+                border: 2px solid #E0E0E0;
+                transition: all 0.3s ease;
+            }
+            
+            .stSelectbox > div > div:hover {
+                border-color: #6A5ACD;
+            }
+                
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .mbti-desc {
+                    padding: 15px;
+                    text-align: left;
+                }
+
+                .trait-box {
+                    padding: 15px;
+                    text-align: left;
+                }
+            }
+        </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="title">Personality Predictor</div>', unsafe_allow_html=True)
+    st.markdown('<div class="subheading">Discover Your MBTI Personality Type</div>', unsafe_allow_html=True)
+
     option = st.selectbox('Select input type:', ('Text', 'CSV or Excel File'), index=0)
-
     if option == 'Text':
         st.info(f"Please provide a text containing 50 to 250 words. For better results, a text of around 200 words is recommended. Ensure the text is written in English.")
         txt = st.text_area(label="Input Text", placeholder="Enter your text here...", height=200)
         words = txt.split()
 
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            predict_button = st.button("Predict", key="predict_button")
-        with col2:
-            num_words = len(words)
-            st.markdown(f"<div style='text-align: right;'><b>Word Count:</b> {num_words}</div>", unsafe_allow_html=True)
-
+        num_words = len(words)
+        st.markdown(f"<div style='margin: 0 0 20px 5px'><b>Word Count:</b> {num_words}</div>", unsafe_allow_html=True)
+        predict_button = st.button("Predict", key="predict_button")
+        
         if predict_button:
             if not txt or not txt.strip():
                 st.error("Please enter some text to predict.")
@@ -116,7 +300,6 @@ def app():
                 mbti_dimensions = ["IE", "NS", "TF", "JP"]
                 mbti_trait = [mbti_dimensions[i][trait] for i, trait in enumerate(binary_predictions[0])]
 
-                # Display the predicted MBTI type with details
                 st.markdown(f'<div class="result-subheading">Predicted MBTI Type:</div>', unsafe_allow_html=True)
                 predicted_type = [ output for output in outputs['mbti_type'] if output["type"] == predicted_mbti_type ]
                 description = predicted_type[0]["description"]
@@ -131,12 +314,10 @@ def app():
                     st.markdown(f'<div class="mbti-desc">{description}</div>', unsafe_allow_html=True)
                     st.markdown(f'<a href="{url}" target="_blank" class="mbti-view-details">View more details</a>', unsafe_allow_html=True)
                 
-                # Display the probabilities
                 st.markdown(f'<div class="result-subheading">Probabilities of Each MBTI Dimension:</div>', unsafe_allow_html=True)
                 type_probabilities = pd.DataFrame({"MBTI Dimension": mbti_dimensions, "Probability": probabilities, "Trait": mbti_trait})
                 st.dataframe(type_probabilities.set_index("MBTI Dimension"), width=800)
                 
-                # Display the traits of the predicted MBTI type
                 mbti_traits = [ trait for trait in predicted_mbti_type ]
                 predicted_mbti_traits = [ output for output in outputs['mbti_traits'] if output["trait"] in mbti_traits ]
 
@@ -180,7 +361,6 @@ def app():
                     if valid_predictions:
                         overall_mbti = Counter(valid_predictions).most_common(1)[0][0]
 
-                        # Display the predicted MBTI type with details
                         st.markdown(f'<div class="result-subheading">Overall MBTI Type:</div>', unsafe_allow_html=True)
                         predicted_type = [ output for output in outputs['mbti_type'] if output["type"] == overall_mbti ]
                         description = predicted_type[0]["description"]
